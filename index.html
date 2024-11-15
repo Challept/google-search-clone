@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sök med Bing</title>
+    <title>Inkognitoläge Sök</title>
     <style>
         body {
             margin: 0;
@@ -12,18 +12,33 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f4f4f4;
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
         }
         iframe {
             width: 90%;
             height: 90%;
             border: none;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        h1 {
+            position: absolute;
+            top: 10px;
+            font-size: 24px;
+        }
+        p {
+            position: absolute;
+            bottom: 10px;
+            font-size: 14px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <iframe src="https://www.bing.com"></iframe>
+    <h1>Inkognitoläge Sök</h1>
+    <iframe src="https://duckduckgo.com"></iframe>
+    <p>Din sökning är privat. Inga cookies eller sökhistorik sparas.</p>
 </body>
 </html>
