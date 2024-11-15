@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Ny modern gradient */
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Modern gradient */
             color: white;
         }
         header {
@@ -42,6 +42,7 @@
             padding: 10px 20px;
             text-decoration: none;
             transition: background 0.3s;
+            cursor: pointer;
         }
         nav a:hover {
             background: #34495e;
@@ -62,10 +63,6 @@
             border: none;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease;
-        }
-        iframe:hover {
-            transform: scale(1.02);
         }
         button {
             margin-top: 20px;
@@ -81,15 +78,39 @@
         button:hover {
             background: #1558c1;
         }
-        footer {
-            background: #1a1a1a;
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
         }
-        footer p {
-            margin: 0;
-            color: #aaa;
+        .popup h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .popup p {
+            font-size: 18px;
+        }
+        .popup button {
+            margin-top: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .popup button:hover {
+            background: #c0392b;
         }
     </style>
 </head>
@@ -100,60 +121,53 @@
 </header>
 
 <nav>
-    <a href="#search">Sök</a>
-    <a href="#about">Om oss</a>
-    <a href="#faq">Vanliga frågor</a>
-    <a href="#contact">Kontakta oss</a>
+    <a onclick="showPopup('searchPopup')">Sök</a>
+    <a onclick="showPopup('aboutPopup')">Om oss</a>
+    <a onclick="showPopup('faqPopup')">Vanliga frågor</a>
+    <a onclick="showPopup('contactPopup')">Kontakta oss</a>
 </nav>
 
 <main>
-    <!-- Söksektion -->
-    <section id="search">
-        <h2>Sök anonymt</h2>
-        <div class="iframe-container">
-            <iframe id="searchFrame" src="https://duckduckgo.com"></iframe>
-            <br>
-            <button id="fullscreenButton">Gå till Fullscreen</button>
-        </div>
-    </section>
-
-    <!-- Om oss sektion -->
-    <section id="about">
-        <h2>Om oss</h2>
-        <p>
-            Vi är en plattform som värnar om din integritet. Vår tjänst låter dig söka på nätet utan att
-            behöva oroa dig för spårning eller att din sökhistorik sparas.
-        </p>
-        <p>
-            Vår vision är att skapa en digital värld där integritet står i centrum. Oavsett vad du söker
-            efter, kan du vara säker på att det förblir mellan dig och sökmotorn.
-        </p>
-    </section>
-
-    <!-- Vanliga frågor -->
-    <section id="faq">
-        <h2>Vanliga frågor</h2>
-        <h3>Hur fungerar tjänsten?</h3>
-        <p>
-            Vår sida använder en anonym sökmotor som inte lagrar cookies eller spårar din aktivitet.
-        </p>
-        <h3>Är det verkligen helt privat?</h3>
-        <p>
-            Ja, vi använder DuckDuckGo som garanterar anonymitet och integritet.
-        </p>
-    </section>
-
-    <!-- Kontakta oss -->
-    <section id="contact">
-        <h2>Kontakta oss</h2>
-        <p>Har du frågor? Tveka inte att kontakta oss:</p>
-        <ul>
-            <li>Email: <a href="mailto:info@inkognitosearch.se">info@inkognitosearch.se</a></li>
-            <li>Telefon: 123-456-789</li>
-            <li>Adress: Integritetsvägen 1, Stockholm</li>
-        </ul>
+    <section class="iframe-container">
+        <iframe id="searchFrame" src="https://duckduckgo.com"></iframe>
+        <br>
+        <button id="fullscreenButton">Gå till Fullscreen</button>
     </section>
 </main>
+
+<!-- Popup för "Sök" -->
+<div id="searchPopup" class="popup">
+    <h2>Sök anonymt</h2>
+    <p>Här kan du söka utan att oroa dig för spårning eller sparad historik.</p>
+    <button onclick="closePopup('searchPopup')">Stäng</button>
+</div>
+
+<!-- Popup för "Om oss" -->
+<div id="aboutPopup" class="popup">
+    <h2>Om oss</h2>
+    <p>
+        Vi är dedikerade till att skydda din integritet och ge dig möjlighet att söka utan att lämna spår.
+    </p>
+    <button onclick="closePopup('aboutPopup')">Stäng</button>
+</div>
+
+<!-- Popup för "Vanliga frågor" -->
+<div id="faqPopup" class="popup">
+    <h2>Vanliga frågor</h2>
+    <p>
+        <strong>Hur fungerar detta?</strong><br>
+        Vi använder en anonym sökmotor som inte lagrar cookies eller spårar användare.
+    </p>
+    <button onclick="closePopup('faqPopup')">Stäng</button>
+</div>
+
+<!-- Popup för "Kontakta oss" -->
+<div id="contactPopup" class="popup">
+    <h2>Kontakta oss</h2>
+    <p>Email: <a href="mailto:info@inkognitosearch.se" style="color: #1a73e8;">info@inkognitosearch.se</a></p>
+    <p>Telefon: 123-456-789</p>
+    <button onclick="closePopup('contactPopup')">Stäng</button>
+</div>
 
 <footer>
     <p>&copy; 2024 Inkognitoläge Sök - Alla rättigheter förbehållna.</p>
@@ -176,20 +190,15 @@
         }
     });
 
-    // Avsluta fullscreen med Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.fullscreenElement) {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) { // Firefox
-                document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { // IE/Edge
-                document.msExitFullscreen();
-            }
-        }
-    });
+    // Visa popup
+    function showPopup(popupId) {
+        document.getElementById(popupId).style.display = 'flex';
+    }
+
+    // Stäng popup
+    function closePopup(popupId) {
+        document.getElementById(popupId).style.display = 'none';
+    }
 </script>
 
 </body>
