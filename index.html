@@ -8,37 +8,183 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #1a1a1a;
-            color: white;
             font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1a1a1a, #333);
+            color: white;
+        }
+        header {
+            background: #4285f4;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 200px;
+            background: #333;
+            height: 100%;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+        nav a {
+            display: block;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: #555;
+        }
+        main {
+            margin-left: 220px;
+            padding: 80px 20px;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        .iframe-container {
+            text-align: center;
         }
         iframe {
             width: 90%;
-            height: 90%;
+            height: 500px;
             border: none;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
-        h1 {
-            position: absolute;
-            top: 10px;
-            font-size: 24px;
+        button {
+            margin-top: 20px;
+            background: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        p {
-            position: absolute;
-            bottom: 10px;
-            font-size: 14px;
+        button:hover {
+            background: #357ae8;
+        }
+        footer {
+            background: #222;
             text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 0;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
+
+<header>
     <h1>Inkognitoläge Sök</h1>
-    <iframe src="https://duckduckgo.com"></iframe>
-    <p>Din sökning är privat. Inga cookies eller sökhistorik sparas.</p>
+</header>
+
+<nav>
+    <a href="#search">Sök</a>
+    <a href="#about">Om oss</a>
+    <a href="#faq">Vanliga frågor</a>
+    <a href="#contact">Kontakta oss</a>
+</nav>
+
+<main>
+    <!-- Söksektion -->
+    <section id="search">
+        <h2>Sök anonymt</h2>
+        <div class="iframe-container">
+            <iframe id="searchFrame" src="https://duckduckgo.com"></iframe>
+            <br>
+            <button id="fullscreenButton">Gå till Fullscreen</button>
+        </div>
+    </section>
+
+    <!-- Om oss sektion -->
+    <section id="about">
+        <h2>Om oss</h2>
+        <p>
+            Vi är en plattform som värnar om din integritet. Vår tjänst låter dig söka på nätet utan att
+            behöva oroa dig för spårning eller att din sökhistorik sparas.
+        </p>
+        <p>
+            Vår vision är att skapa en digital värld där integritet står i centrum. Oavsett vad du söker
+            efter, kan du vara säker på att det förblir mellan dig och sökmotorn.
+        </p>
+    </section>
+
+    <!-- Vanliga frågor -->
+    <section id="faq">
+        <h2>Vanliga frågor</h2>
+        <h3>Hur fungerar tjänsten?</h3>
+        <p>
+            Vår sida använder en anonym sökmotor som inte lagrar cookies eller spårar din aktivitet.
+        </p>
+        <h3>Är det verkligen helt privat?</h3>
+        <p>
+            Ja, vi använder DuckDuckGo som garanterar anonymitet och integritet.
+        </p>
+    </section>
+
+    <!-- Kontakta oss -->
+    <section id="contact">
+        <h2>Kontakta oss</h2>
+        <p>Har du frågor? Tveka inte att kontakta oss:</p>
+        <ul>
+            <li>Email: <a href="mailto:info@inkognitosearch.se">info@inkognitosearch.se</a></li>
+            <li>Telefon: 123-456-789</li>
+            <li>Adress: Integritetsvägen 1, Stockholm</li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Inkognitoläge Sök - Alla rättigheter förbehållna.</p>
+</footer>
+
+<script>
+    const fullscreenButton = document.getElementById('fullscreenButton');
+
+    // Funktion för fullscreen
+    fullscreenButton.addEventListener('click', () => {
+        const elem = document.documentElement; // Hela sidan
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { // Firefox
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+        }
+    });
+
+    // Escape för att lämna fullscreen
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.fullscreenElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
