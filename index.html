@@ -9,17 +9,18 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #1a1a1a, #333);
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Ny modern gradient */
             color: white;
         }
         header {
-            background: #4285f4;
+            background: #1a73e8;
             padding: 20px;
             text-align: center;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         header h1 {
             margin: 0;
@@ -30,7 +31,7 @@
             top: 60px;
             left: 0;
             width: 200px;
-            background: #333;
+            background: #2c3e50;
             height: 100%;
             padding-top: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
@@ -43,7 +44,7 @@
             transition: background 0.3s;
         }
         nav a:hover {
-            background: #555;
+            background: #34495e;
         }
         main {
             margin-left: 220px;
@@ -56,27 +57,32 @@
             text-align: center;
         }
         iframe {
-            width: 90%;
-            height: 500px;
+            width: 80%;
+            height: 400px;
             border: none;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+        iframe:hover {
+            transform: scale(1.02);
         }
         button {
             margin-top: 20px;
-            background: #4285f4;
+            background: #1a73e8;
             color: white;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
+            transition: background 0.3s;
         }
         button:hover {
-            background: #357ae8;
+            background: #1558c1;
         }
         footer {
-            background: #222;
+            background: #1a1a1a;
             text-align: center;
             padding: 20px;
             margin-top: 40px;
@@ -155,22 +161,22 @@
 
 <script>
     const fullscreenButton = document.getElementById('fullscreenButton');
+    const iframe = document.getElementById('searchFrame');
 
-    // Funktion för fullscreen
+    // Gör iframen fullskärm
     fullscreenButton.addEventListener('click', () => {
-        const elem = document.documentElement; // Hela sidan
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) { // Firefox
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { // IE/Edge
-            elem.msRequestFullscreen();
+        if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+        } else if (iframe.mozRequestFullScreen) { // Firefox
+            iframe.mozRequestFullScreen();
+        } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) { // IE/Edge
+            iframe.msRequestFullscreen();
         }
     });
 
-    // Escape för att lämna fullscreen
+    // Avsluta fullscreen med Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && document.fullscreenElement) {
             if (document.exitFullscreen) {
