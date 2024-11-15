@@ -9,11 +9,11 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Modern gradient */
-            color: white;
+            background: linear-gradient(to bottom, #f8f9fa, #e3f2fd); /* Ljusare bakgrund */
+            color: #333;
         }
         header {
-            background: #1a73e8;
+            background: #42a5f5; /* Ljusblå ton */
             padding: 20px;
             text-align: center;
             position: fixed;
@@ -21,6 +21,7 @@
             width: 100%;
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
         }
         header h1 {
             margin: 0;
@@ -31,7 +32,7 @@
             top: 60px;
             left: 0;
             width: 200px;
-            background: #2c3e50;
+            background: #64b5f6;
             height: 100%;
             padding-top: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
@@ -45,72 +46,33 @@
             cursor: pointer;
         }
         nav a:hover {
-            background: #34495e;
+            background: #2196f3;
         }
         main {
             margin-left: 220px;
             padding: 80px 20px;
         }
         section {
-            margin-bottom: 40px;
-        }
-        .iframe-container {
             text-align: center;
-        }
-        iframe {
-            width: 80%;
-            height: 400px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            margin-top: 50px;
         }
         button {
-            margin-top: 20px;
-            background: #1a73e8;
+            background: #66bb6a; /* Grön för "Starta" */
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 16px;
-            transition: background 0.3s;
+            font-size: 18px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         button:hover {
-            background: #1558c1;
+            background: #43a047;
+            transform: scale(1.05);
         }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .popup h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        .popup p {
-            font-size: 18px;
-        }
-        .popup button {
-            margin-top: 20px;
-            background: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .popup button:hover {
-            background: #c0392b;
+        iframe {
+            display: none; /* Göm iframen från början */
         }
     </style>
 </head>
@@ -121,26 +83,20 @@
 </header>
 
 <nav>
-    <a onclick="showPopup('searchPopup')">Sök</a>
     <a onclick="showPopup('aboutPopup')">Om oss</a>
     <a onclick="showPopup('faqPopup')">Vanliga frågor</a>
     <a onclick="showPopup('contactPopup')">Kontakta oss</a>
 </nav>
 
 <main>
-    <section class="iframe-container">
-        <iframe id="searchFrame" src="https://duckduckgo.com"></iframe>
-        <br>
-        <button id="fullscreenButton">Gå till Fullscreen</button>
+    <section>
+        <h2>Välkommen till Inkognitoläge</h2>
+        <p>Klicka på knappen nedan för att starta en säker sökning i fullskärm.</p>
+        <button id="startButton">Starta Sökning</button>
     </section>
-</main>
 
-<!-- Popup för "Sök" -->
-<div id="searchPopup" class="popup">
-    <h2>Sök anonymt</h2>
-    <p>Här kan du söka utan att oroa dig för spårning eller sparad historik.</p>
-    <button onclick="closePopup('searchPopup')">Stäng</button>
-</div>
+    <iframe id="searchFrame" src="https://duckduckgo.com"></iframe>
+</main>
 
 <!-- Popup för "Om oss" -->
 <div id="aboutPopup" class="popup">
@@ -148,7 +104,6 @@
     <p>
         Vi är dedikerade till att skydda din integritet och ge dig möjlighet att söka utan att lämna spår.
     </p>
-    <button onclick="closePopup('aboutPopup')">Stäng</button>
 </div>
 
 <!-- Popup för "Vanliga frågor" -->
@@ -158,15 +113,13 @@
         <strong>Hur fungerar detta?</strong><br>
         Vi använder en anonym sökmotor som inte lagrar cookies eller spårar användare.
     </p>
-    <button onclick="closePopup('faqPopup')">Stäng</button>
 </div>
 
 <!-- Popup för "Kontakta oss" -->
 <div id="contactPopup" class="popup">
     <h2>Kontakta oss</h2>
-    <p>Email: <a href="mailto:info@inkognitosearch.se" style="color: #1a73e8;">info@inkognitosearch.se</a></p>
+    <p>Email: <a href="mailto:info@inkognitosearch.se" style="color: #42a5f5;">info@inkognitosearch.se</a></p>
     <p>Telefon: 123-456-789</p>
-    <button onclick="closePopup('contactPopup')">Stäng</button>
 </div>
 
 <footer>
@@ -174,31 +127,38 @@
 </footer>
 
 <script>
-    const fullscreenButton = document.getElementById('fullscreenButton');
+    const startButton = document.getElementById('startButton');
     const iframe = document.getElementById('searchFrame');
 
-    // Gör iframen fullskärm
-    fullscreenButton.addEventListener('click', () => {
+    // Starta sökning i fullskärm
+    startButton.addEventListener('click', () => {
+        iframe.style.display = 'block'; // Visa iframen
         if (iframe.requestFullscreen) {
             iframe.requestFullscreen();
-        } else if (iframe.mozRequestFullScreen) { // Firefox
+        } else if (iframe.mozRequestFullScreen) {
             iframe.mozRequestFullScreen();
-        } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        } else if (iframe.webkitRequestFullscreen) {
             iframe.webkitRequestFullscreen();
-        } else if (iframe.msRequestFullscreen) { // IE/Edge
+        } else if (iframe.msRequestFullscreen) {
             iframe.msRequestFullscreen();
         }
     });
 
-    // Visa popup
-    function showPopup(popupId) {
-        document.getElementById(popupId).style.display = 'flex';
-    }
+    // Avlyssna när fullscreen avslutas
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+            iframe.style.display = 'none'; // Göm iframen när fullscreen avslutas
+            location.reload(); // Ladda om sidan
+        }
+    });
 
-    // Stäng popup
-    function closePopup(popupId) {
-        document.getElementById(popupId).style.display = 'none';
-    }
+    // Avlyssna för äldre webbläsare
+    document.addEventListener('webkitfullscreenchange', () => {
+        if (!document.webkitFullscreenElement) {
+            iframe.style.display = 'none';
+            location.reload();
+        }
+    });
 </script>
 
 </body>
